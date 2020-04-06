@@ -107,3 +107,82 @@ namespace jj04
 
 #endif // !_MYSORT_H
 
+//øÏ≈≈
+namespace jj05
+{
+	int partion(vector<int>& nums, int lo, int hi);
+	void quick_sort(vector<int> &nums, int lo, int hi)
+	{
+		if (lo < hi)
+		{
+        int piovt = partion(nums, lo, hi);
+		quick_sort(nums,  lo, piovt - 1);
+		quick_sort(nums, piovt + 1, hi);
+		}
+		
+	}
+
+	int partion(vector<int> &nums, int lo, int hi)
+	{
+		int v = nums[lo];
+		int i = lo;
+		int j = hi+1;
+		while (1)
+		{
+			while (++i <= hi && nums[i] < v);
+			while (--j >= lo && nums[j] > v);
+			if (i >= j)
+				break;
+			swap(nums[i], nums[j]);
+		}
+		nums[lo] = nums[j];
+		nums[j] = v;
+		return j;
+	}
+}
+
+//topkŒ Ã‚
+namespace jj06 {
+	class Solution {
+	public:
+		vector<int> getLeastNumbers(vector<int>& arr, int k) {
+
+			if (k == 0 || arr.size() == 0)
+			{
+				return vector<int>();
+			}
+			vector<int> res = quick_sort(arr, 0, arr.size() - 1, k - 1);
+			vector<int> ans(k);
+			copy(res.begin(), res.begin() + k, ans.begin());
+			return ans;
+		}
+	private:
+		vector<int> quick_sort(vector<int>& nums, int lo, int hi, int k)
+		{
+			int j = partition(nums, lo, hi);
+			if (j == k)
+				return nums;
+
+			return j > k ? quick_sort(nums, lo, j - 1, k) : quick_sort(nums, j + 1, hi, k);
+		}
+
+		int partition(vector<int>& nums, int lo, int hi)
+		{
+			int v = nums[lo];
+			int i = lo, j = hi + 1;
+			while (1)
+			{
+				while (++i <= hi && nums[i] < v);
+				while (--j >= lo && nums[j] > v);
+				if (i >= j) break;
+
+				swap(nums[i], nums[j]);
+			}
+			nums[lo] = nums[j];
+			nums[j] = v;
+			return j;
+		}
+	};
+
+}
+

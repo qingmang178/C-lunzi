@@ -1,18 +1,21 @@
 #include<iostream>
 #include<algorithm>
 
-#include"leetcode0289.h"
-
+#include<string>
+#include<map>
 #include<vector>
+
+#include "mysort.h"
 using namespace std;
+
 
 int main()
 {
-	Solution solu;
-	vector<vector<int>> a = { {0, 1, 0
-}, { 0, 0, 1
-}, { 1, 1, 1
-}, { 0, 0, 0 } };
-
-	solu.gameOfLife(a);
+	vector<int> test = { 3,5,1,4,2,6 };
+	jj05::quick_sort(test, 0, test.size() - 1);
+	for (auto t : test)
+	{
+		cout << t << " ";
+	}
 }
+
